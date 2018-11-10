@@ -162,3 +162,20 @@
   border: 0;
 }
 
+.mypage-item-body{
+  color: gray;
+  .mypage-item-text{
+  margin-bottom: 8px;
+}
+  .sell-btn{
+    display: inline-block;
+    padding: 5px;
+   border-radius: 5px;
+   font-size: 14px;
+  }
+}
+
+.btn-blue{
+  background-color: $font_light_blue;
+  color: $white;
+}

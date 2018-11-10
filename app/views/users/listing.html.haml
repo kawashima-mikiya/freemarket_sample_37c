@@ -5,32 +5,34 @@
       %h2.mypage-tab-head.bold 出品した商品
       %ul.listing-tabs
         %li.active
-          %h3  出品中
-          %a
+          =link_to users_listing_path do
+            %h3.bold 出品中
         %li
-          %h3  取引中
+          =link_to users_in_progress_path do
+            %h3.bold 取引中
         %li
-          %h3  売却済
+          =link_to users_completed_path do
+            %h3.bold  売却済
       .tab-content
         - if @items.length != 0
-          %ul.notification__content
+          %ul.border.notification__content
             - @items.each do |item|
               %li
                 .mypage-item-link
                   = link_to item_path(item.id) do
                     %figure
-                      = image_tag item.images.first.image, width: "48"
+                      = image_tag item.images.first.image, width: "48", height: "48", class: "clearfix"
                     .mypage-item-body
                       .mypage-item-text
-                        %ul
-                          %li
-                            = item.item_name
-                          - if item.status == "stopped"
-                            %li
-                              公開停止中
-                          - else
-                            %li
-                              出品中
+                        = item.item_name
+                      .mypage-item-box.font-2
+                        %i{class: "far fa-heart heart-icon"}
+                        %span 10
+                        - if item.status == "stopped"
+                          .btn-red.sell-btn 公開停止中
+                        - else
+                          .btn-blue.sell-btn 出品中
+                        %i.fas.fa-angle-right.fa-lg
         - else
           %ul.mypage-item-list
           %li.mypage-item-not-found.bold 出品中の商品がありません

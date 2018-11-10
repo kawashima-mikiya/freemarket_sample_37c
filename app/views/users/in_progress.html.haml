@@ -1,6 +1,41 @@
 = render partial: 'items/shared/header'
 .mypage-container.clearfix
-  = render partial: 'selling_list',locals: {items: @items}
+  %main.l-container
+    %section.mypage-tab-container
+      %h2.mypage-tab-head.bold 出品した商品
+      %ul.listing-tabs
+        %li
+          =link_to users_listing_path do
+            %h3.bold 出品中
+        %li.active
+          =link_to users_in_progress_path do
+            %h3.bold 取引中
+        %li
+          =link_to users_completed_path do
+            %h3.bold  売却済
+      .tab-content
+        - if @items.length != 0
+          %ul.border.notification__content
+            - @items.each do |item|
+              %li
+                .mypage-item-link
+                  = link_to item_path(item.id) do
+                    %figure
+                      = image_tag item.images.first.image, width: "48", height: "48", class: "clearfix"
+                    .mypage-item-body
+                      .mypage-item-text
+                        = item.item_name
+                      .mypage-item-box.font-2
+                        %i{class: "far fa-heart heart-icon"}
+                        %span 10
+                        .btn-blue.sell-btn 配送待ち
+                        %i.fas.fa-angle-right.fa-lg
+        - else
+          %ul.mypage-item-list
+          %li.mypage-item-not-found.bold 出品中の商品がありません
+    %ul.mypage-history
+      %li.paper-prev.paper-cell
+      %li.paper-nextpaper-cell
   = render partial: 'sidebar'
   = render partial: 'footer_sell_btn'
 = render partial: 'items/shared/footer'
