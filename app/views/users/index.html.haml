@@ -1,92 +1,79 @@
 = render partial: 'items/shared/header'
 .mypage-container.clearfix
   %main.l-container
-    %section.user-icon
-      %a
-        %figure
-          %img{alt: "顔写真1", src: "//static-mercari-jp-imgtr2.akamaized.net/images/member_photo_noimage_thumb.png", width: "60"}/
-        %h2.bold お名前
-        .user-number
-          %div
-            評価
-            %span.bold 0
-          %div
-            出品数
-            %span.bold 0
-    %section.notification-todo
-      %ul.notification-todo__tabs
-        %li.tab-notification.active
-          %h3
-            %a
-              お知らせ
-        %li.tab-notification
-          %h3
-            %a
-              やることリスト
-      %ul.notification__content
-        %li
-          %a.notification-todo__content-link
-            %figure
-              %img.clearfix{src: "//static-mercari-jp.akamaized.net/images/mercari_profile.png", width: "48"}/
-            .notification-todo__content-body
-              .notification-todo__content-link--text
-                発送のお知らせ
-              %time
-                %i.far.fa-clock.my-gray
-                %span.my-gray 2 日前
-                %i.fas.fa-angle-right.fa-lg
-        %li
-          %a.notification-todo__content-link
-            %figure
-              %img.clearfix{src: "//static-mercari-jp.akamaized.net/images/mercari_profile.png", width: "48"}/
-            .notification-todo__content-body
-              .notification-todo__content-link--text
-                注文のお知らせ
-              %time
-                %i.far.fa-clock.my-gray
-                %span.my-gray 2 日前
-                %i.fas.fa-angle-right.fa-lg
-        %li
-          %a.notification-todo__content-link
-            %figure
-              %img.clearfix{src: "//static-mercari-jp.akamaized.net/images/mercari_profile.png", width: "48"}/
-            .notification-todo__content-body
-              .notification-todo__content-link--text
-                注文のお知らせ
-              %time
-                %i.far.fa-clock.my-gray
-                %span.my-gray 2 日前
-                %i.fas.fa-angle-right.fa-lg
-        %li
-          %a.notification-todo__content-link
-            %figure
-              %img.clearfix{src: "//static-mercari-jp.akamaized.net/images/mercari_profile.png", width: "48"}
-            .notification-todo__content-body
-              .notification-todo__content-link--text
-                個別メッセージ
-              %time
-                %i.far.fa-clock.my-gray
-                %span.my-gray 2 日前
-                %i.fas.fa-angle-right.fa-lg
-        %li.mypage-go-list
-          %a 一覧を見る
-    %section.history-container.bold
-      %h2.history-container__head
-        購入した商品
-      %ul.history-container__tabs
-        %li.active.tab-label
-          %h3
-            %a
-              取引中
-        %li.tab-label
-          %h3
-            %a
-              過去の取引
-      .history-container__content
-        %ul.mypage-item-list.active
-          %li.mypage-item-not-found.bold 取引中の商品がありません
-        %ul.mypage-item-list
-          %li.mypage-item-not-found.bold 過去に取引した商品がありません
+    .user-notification
+      %section.user-icon
+        %a
+          %figure
+            %img{alt: "顔写真1", src: "//static-mercari-jp-imgtr2.akamaized.net/images/member_photo_noimage_thumb.png", width: "60"}/
+          %h2.bold
+          = current_user.nickname
+          .user-number
+            %div
+              評価
+              %span.bold 10
+            %div
+              出品数
+              %span.bold
+              = @item.length
+      %section.notification-todo
+        %ul.notification-todo__tabs
+          %li.tab-notification.active
+            %h3
+              %a
+                お知らせ
+          %li.tab-notification
+            %h3
+              %a
+                やることリスト
+        %ul.notification__content
+          %li
+            %a.notification-todo__content-link
+              %figure
+                %img.clearfix{src: "//static-mercari-jp.akamaized.net/images/mercari_profile.png", width: "48"}/
+              .notification-todo__content-body
+                .notification-todo__content-link--text
+                  発送のお知らせ
+                %time
+                  %i.far.fa-clock.my-gray
+                  %span.my-gray 2 日前
+                  %i.fas.fa-angle-right.fa-lg
+          %li
+            %a.notification-todo__content-link
+              %figure
+                %img.clearfix{src: "//static-mercari-jp.akamaized.net/images/mercari_profile.png", width: "48"}/
+              .notification-todo__content-body
+                .notification-todo__content-link--text
+                  注文のお知らせ
+                %time
+                  %i.far.fa-clock.my-gray
+                  %span.my-gray 2 日前
+                  %i.fas.fa-angle-right.fa-lg
+          %li
+            %a.notification-todo__content-link
+              %figure
+                %img.clearfix{src: "//static-mercari-jp.akamaized.net/images/mercari_profile.png", width: "48"}/
+              .notification-todo__content-body
+                .notification-todo__content-link--text
+                  注文のお知らせ
+                %time
+                  %i.far.fa-clock.my-gray
+                  %span.my-gray 2 日前
+                  %i.fas.fa-angle-right.fa-lg
+          %li
+            %a.notification-todo__content-link
+              %figure
+                %img.clearfix{src: "//static-mercari-jp.akamaized.net/images/mercari_profile.png", width: "48"}
+              .notification-todo__content-body
+                .notification-todo__content-link--text
+                  個別メッセージ
+                %time
+                  %i.far.fa-clock.my-gray
+                  %span.my-gray 2 日前
+                  %i.fas.fa-angle-right.fa-lg
+          %li.mypage-go-list
+            %a 一覧を見る
+    = render partial: "buying_item", locals: {items: @items, bought_items: @bought_items}
   = render partial: 'sidebar'
   = render partial: 'footer_sell_btn'
 = render partial: 'items/shared/footer'

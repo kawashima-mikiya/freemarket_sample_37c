@@ -3,13 +3,12 @@ class UsersController < ApplicationController
    before_action :set_user ,only:[:index,:in_progress,:completed,:purchase,:purchased,:listing, :logout]
 
   def index
+    @item = Item.where(user_id: current_user.id)
+    @items = Item.be_bought(@user.id).where.not(status: 2).order("created_at DESC")
+    @bought_items = Item.be_bought(@user.id).where(status: 2).order("created_at DESC")
   end
 
   def show
-    @user = User.find_by(id: params[:id])
-    @item = @user.items.find(id: 1)   #idは仮置きです
-    @item_images = Image.where(item_id: 1)
-    @userdetail = UserDetail.find(id: 1)#idは仮置きです
   end
 
   def edit
@@ -61,7 +60,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(id: current_user.id)#idは仮置きです。ログイン機能実装したらcurrent_user.idとします。
+    @user = User.find_by(id: current_user.id)
   end
 end
 

@@ -1,0 +1,49 @@
+%section.mypage-tab-container
+  %h2.mypage-tab-head.bold 購入した商品
+  %ul.listing-tabs
+    %li.half-tab.tab-label.active
+      %h3.bold 取引中
+    %li.half-tab.tab-label
+      %h3.bold  購入済
+  .history-container__content
+    - if items.length != 0
+      %ul.mypage-item-list.active
+        - items.each do |item|
+          %li
+            .mypage-item-link
+              = link_to transaction_detail_path(item.id) do
+                %figure
+                  = image_tag item.images.first.image, width: "48", height: "48", class: "clearfix"
+                .mypage-item-body
+                  .mypage-item-text
+                    = item.item_name
+                  .mypage-item-box.font-2
+                    %i{class: "far fa-heart heart-icon"}
+                    %span 10
+                    .btn-blue.sell-btn 配送待ち
+                    %i.fas.fa-angle-right.fa-lg
+                    = fa_icon("fa-angle-right")
+    - else
+      %ul.history-container__content
+        %li.mypage-item-not-found.bold.mypage-item-list.active
+          取引中の商品がありません
+    - if bought_items.length != 0
+      %ul.mypage-item-list.active
+        - bought_items.each do |item|
+          %li
+            .mypage-item-link
+              = link_to transaction_detail_path(item.id) do
+                %figure
+                  = image_tag item.images.first.image, width: "48", height: "48", class: "clearfix"
+                .mypage-item-body
+                  .mypage-item-text
+                    = item.item_name
+                  .mypage-item-box.font-2
+                    %i{class: "far fa-heart heart-icon"}
+                    %span 10
+                    .btn-blue.sell-btn 購入完了
+                    = fa_icon("fa-angle-right")
+    - else
+      %ul.history-container__content
+        %li.mypage-item-not-found.bold.mypage-item-list
+          購入済の商品がありません
